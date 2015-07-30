@@ -41,6 +41,8 @@ class GifController
     		return $app->redirect('/?cheating-pipe-smuggler');
     	}
 
+    	$gif = json_decode($predis->get('info:' . $aid), true);
+
     	$predis->incr('score:' . $aid);
     	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
     	
@@ -60,6 +62,8 @@ class GifController
     		return $app->redirect('/?cheating-pipe-smuggler');
     	}
 
+		$gif = json_decode($predis->get('info:' . $aid), true);
+		
     	$predis->decr('score:' . $aid);
     	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
     	
