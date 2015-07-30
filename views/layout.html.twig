@@ -67,11 +67,11 @@
 	<script>
 		Materialize.toast('Don\'t try to delete somebody elses gif, how rude?!', 4000) // 4000 is the duration of the toast
 	</script>
-{% elseif app.request.get('fought') == 'ochaye' %}
+{% elseif app.request.get('fought') is not empty %}
 	<div class='container' style='margin-top:1em'>
 		<div class='row'>
 			<div class='col s12'>
-				<a target='_blank' href='https://twitter.com/intent/tweet?text=My gif is the best gif at giffight.club! Dare you challenge me?!&hashtags=giffight&via=giffight&related=ashleyhindle&url=http://giffight.club' class='btn'>Invite fighters to challenge you (do they even have a chance?!)</a>
+				<a target='_blank' href='https://twitter.com/intent/tweet?text=My gif is the best gif at giffight.club! Dare you challenge me?!&hashtags=giffight&via=giffight&related=ashleyhindle&url=http://giffight.club/?share={{app.request.get('fought')}}' class='btn'>Invite fighters to challenge you (do they even have a chance?!)</a>
 			</div>
 		</div>
 	</div>

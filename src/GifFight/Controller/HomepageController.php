@@ -56,7 +56,7 @@ class HomepageController
     	$predis->set('score:' . $aid, 1);
     	$predis->lpush(date('Y-m-d'), [ $aid ]);
 
-    	return $app->redirect('/?fought=ochaye');
+    	return $app->redirect('/?fought=' . $aid);
     }
 
     public function logoutAction(Application $app)
