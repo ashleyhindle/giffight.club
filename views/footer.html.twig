@@ -41,4 +41,8 @@
   ga('create', 'UA-65753794-1', 'auto');
   ga('send', 'pageview');
 
+  {% if app.request.get('share') is not empty %}
+  setTimeout(function() {$('#gif_{{app.request.get('share')}}').click()}, 500);
+  {% endif %}
+
 </script>
