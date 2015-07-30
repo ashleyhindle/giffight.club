@@ -1,0 +1,14 @@
+.gif {
+	margin: 1.5em;
+}
+
+.vote {
+	margin: 0px !important;
+	font-weight: 600;
+}
+
+.vote .badge {
+	position: static;
+	min-width: 0;
+	font-weight: 400;
+}

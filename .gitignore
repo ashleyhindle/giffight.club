@@ -1,0 +1,10 @@
+composer.phar
+vendor/
+.vagrant/
+.idea/
+node_modules/
+bower_components/
+web/css/materialize.css
+web/js/materialize.js
+web/font/
+config/secrets.php

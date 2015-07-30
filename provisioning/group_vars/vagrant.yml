@@ -1,0 +1,11 @@
+---
+mysql_username: giffight
+mysql_password: giffight
+mysql_root_username: root
+mysql_root_password: giffight
+mysql_hostname: 127.0.0.1
+mysql_database: giffight
+mysql_config: default.j2
+import_sql: true
+dir_root: /var/giffight.club/
+vagrant: true
