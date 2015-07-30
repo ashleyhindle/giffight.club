@@ -32,41 +32,44 @@ class GifController
     {
     	$predis = $app['predis'];
     	$aid = $request->get('id');
+    	$gif = json_decode($predis->get('info:' . $aid), true);
+    	$gif['key_added_to'] = str_replace('giffight:', '', $gif['key_added_to']);
 
     	if(empty($app['session']->get('twitter_screen_name'))) {
     		return $app->redirect('/twitter');
     	}
 
     	if (in_array($app['session']->get('twitter_screen_name'), $predis->lrange('votes:' . $aid, 0, 10000))) {
-    		return $app->redirect('/?cheating-pipe-smuggler');
+    		return $app->redirect('/fight/' . $gif['key_added_to'] . '?cheating-pipe-smuggler');
     	}
 
-    	$gif = json_decode($predis->get('info:' . $aid), true);
 
     	$predis->incr('score:' . $aid);
     	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
     	
-    	return $app->redirect('/fight/' . str_replace('giffight:', '', $gif['key_added_to']) . '?voted');
+    	return $app->redirect('/fight/' . $gif['key_added_to'] . '?voted');
     }
 
     public function downvoteAction(Request $request, Application $app)
     {
     	$predis = $app['predis'];
     	$aid = $request->get('id');
+    	$gif = json_decode($predis->get('info:' . $aid), true);
+    	$gif['key_added_to'] = str_replace('giffight:', '', $gif['key_added_to']);
 
     	if(empty($app['session']->get('twitter_screen_name'))) {
-    		return $app->redirect('/?login-to-vote');
+    		return $app->redirect('/twitter');
     	}
 
     	if (in_array($app['session']->get('twitter_screen_name'), $predis->lrange('votes:' . $aid, 0, 10000))) {
-    		return $app->redirect('/?cheating-pipe-smuggler');
+    		return $app->redirect('/fight/' . $gif['key_added_to'] . '?cheating-pipe-smuggler');
     	}
 
-		$gif = json_decode($predis->get('info:' . $aid), true);
+		
 
     	$predis->decr('score:' . $aid);
     	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
     	
-    	return $app->redirect('/fight/' . str_replace('giffight:', '', $gif['key_added_to']) . '?voted');
+    	return $app->redirect('/fight/' . $gif['key_added_to'] . '?voted');
     }
 }
