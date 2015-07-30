@@ -61,7 +61,7 @@ class HomepageController
     		'twitter_screen_name' => $app['session']->get('twitter_screen_name')
     		]));
 
-    	$predis->set('score:' . $aid, 1);
+    	$predis->set('score:' . $aid, 0);
     	$predis->lpush(date('Y-m-d'), [ $aid ]);
 
     	return $app->redirect('/?fought=' . $aid);
