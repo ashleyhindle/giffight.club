@@ -32,14 +32,10 @@
     {% for gif in gifs %}
       <div class="col s12 m4 l3 gif no-padding">
         <div class='row vote'>
-          <a href='/{{gif.aid}}/up' class='col s4 green lighten-1 center-align btn'>
-            UP
+          <a href='/{{gif.aid}}/up' class='col s8 green lighten-1 center-align btn'>
+                  <i class="material-icons left">done</i>UPVOTE!
           </a>
           <span class="col s4 btn-flat center-align">{{gif.score}}</span>
-
-          <a href='/{{gif.aid}}/down' class='col s4 red lighten-1 center-align btn'>
-            DOWN
-          </a>
         </div>
 
         <div id='gif_{{gif.aid}}' style='height:200px;min-height:200px;overflow:hidden;background-position: center;background-image: url("{{gif.url}}");background-repeat:no-repeat;' class="materialboxed" data-caption="{{headline.title}}" src="{{gif.url}}"></div>
