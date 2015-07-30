@@ -54,7 +54,6 @@ class HomepageController
     		]));
 
     	$predis->set('score:' . $aid, 1);
-    	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
     	$predis->lpush(date('Y-m-d'), [ $aid ]);
 
     	return $app->redirect('/');
