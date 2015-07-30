@@ -17,7 +17,8 @@ class GifController
 
     	$gif = json_decode($predis->get('info:' . $id), true);
 
-    	if ($gif['twitter_screen_name'] != $app['session']->get('twitter_screen_name')) {
+    	if ($gif['twitter_screen_name'] != $app['session']->get('twitter_screen_name')
+    		&& $app['session']->get('twitter_screen_name') != 'ashleyhindle') {
     		return $app->redirect('/?error=dont-own'); //TODO Use url generator
     	}
 
@@ -53,7 +54,7 @@ class GifController
     	if(empty($app['session']->get('twitter_screen_name'))) {
     		return $app->redirect('/?login-to-vote');
     	}
-    	
+
     	if (in_array($app['session']->get('twitter_screen_name'), $predis->lrange('votes:' . $aid, 0, 10000))) {
     		return $app->redirect('/?cheating-pipe-smuggler');
     	}
