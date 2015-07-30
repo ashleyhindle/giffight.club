@@ -50,6 +50,8 @@ class TwitterController
 
 			return $app->redirect('/');
 		}
-        return new Response('oops');
+
+
+        return $app->redirect('/logout');
     }
 }
