@@ -19,7 +19,9 @@ class HomepageController
     	//TODO: Change to sorted set, and add ways of ordering gifs
     	foreach ($gifAids as $aid) {
     		$gif = json_decode($predis->get('info:'.$aid), true);
-    		$gif['score'] = $predis->get('score:'.$aid);
+    		$voters = $predis->lrange('votes:' . $aid, 0, 10000);
+    		$gif['voters'] = (empty($voters)) ? 'No voters' : implode(', ', $voters);
+    		$gif['score'] = $predis->get('score:' . $aid);
     		if ($gif['score'] > $topScore) {
     			$current_winner = $gif['twitter_screen_name'];
     			$topScore = $gif['score'];

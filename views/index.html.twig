@@ -35,7 +35,7 @@
           <a href='/{{gif.aid}}/up' class='col s8 green lighten-1 center-align btn'>
                   <i class="material-icons left">done</i>UPVOTE!
           </a>
-          <span class="col s4 btn-flat center-align">{{gif.score}}</span>
+          <span class="col s4 btn-flat center-align tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{gif.voters}}">{{gif.score}}</span>
         </div>
 
         <div id='gif_{{gif.aid}}' style='height:200px;min-height:200px;overflow:hidden;background-position: center;background-image: url("{{gif.url}}");background-repeat:no-repeat;' class="materialboxed" data-caption="{{headline.title}}" src="{{gif.url}}"></div>
