@@ -33,7 +33,7 @@ class GifController
     	$aid = $request->get('id');
 
     	if(empty($app['session']->get('twitter_screen_name'))) {
-    		return $app->redirect('/?login-to-vote');
+    		return $app->redirect('/twitter');
     	}
 
     	if (in_array($app['session']->get('twitter_screen_name'), $predis->lrange('votes:' . $aid, 0, 10000))) {
