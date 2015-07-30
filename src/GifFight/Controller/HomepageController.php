@@ -26,8 +26,8 @@ class HomepageController
         	[
         		'gifs' => $gifs,
         		'headline' => [
-        			'title' => "Dave Grohl’s Surgeon Invited to Sing With Foo Fighters And Rocked the Stadium!",
-        			'link' => 'http://www.goodnewsnetwork.org/dave-grohls-surgeon-invited-to-sing-with-foo-fighters-and-rocked-the-stadium/'
+        			'title' => "Behind Bars Barista Training a Boost for Women’s Prison Inmates",
+        			'link' => 'http://www.goodnewsnetwork.org/behind-bars-barista-training-boost-womens-prison-inmates/'
         		]
         	]);
 
