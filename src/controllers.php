@@ -9,6 +9,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 $app->get('/', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('homepage');
 
+$app->get('/redis/{votelistkey}/{title}', 'GifFight\Controller\HomepageController::redisAction')
+    ->bind('redis-key-title')
+    ->assert('title', '.+');
+
+$app->get('/fight/{votelistkey}', 'GifFight\Controller\HomepageController::indexAction')
+    ->bind('fight-by-key')
+    ->assert('votelistkey', '.+');
+
 $app->get('/logout', 'GifFight\Controller\HomepageController::logoutAction')
     ->bind('logout');
 

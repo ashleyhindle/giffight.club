@@ -23,6 +23,7 @@ class GifController
     	}
 
     	$predis->lrem(date('Y-m-d', $gif['added']), 1, $id);
+    	$predis->lrem($gif['key_added_to'], 1, $id);
 
     	return $app->redirect('/?removed');
     }

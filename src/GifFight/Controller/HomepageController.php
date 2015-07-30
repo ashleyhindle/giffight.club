@@ -7,10 +7,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomepageController
 {
+	public function redisAction(Request $request, Application $app)
+	{
+		$voteListKey = ($request->get('votelistkey') != null) ? $request->get('votelistkey') : date('Y-m-d');
+		$title = $request->get('title');
+		$app['predis']->set('title:' . $voteListKey, $title);
+		return new Response("Set 'title:{$voteListKey}' to '{$title}' now http://giffight.club/fight/{$voteListKey} should work");
+	}
+
     public function indexAction(Request $request, Application $app)
     {
+    	$voteListKey = ($request->get('votelistkey') != null) ? $request->get('votelistkey') : date('Y-m-d');
     	$predis = $app['predis'];
-    	$gifAids = $predis->lrange(date('Y-m-d'), 0, 10000); // limit to 10, 000 gifs
+    	$gifAids = $predis->lrange($voteListKey, 0, 10000); // limit to 10, 000 gifs
     	$gifs = [];
     	$current_winner = 'giffight';
     	$topScore = 0;
@@ -33,7 +42,7 @@ class HomepageController
         	[
         		'gifs' => $gifs,
         		'headline' => [
-        			'title' => "Your reaction when you step on lego",
+        			'title' =>  ($predis->get('title:' . $voteListKey)) ?: "Your reaction when you step on lego",
         			'link' => ''
         		],
         		'current_winner' => $current_winner
@@ -53,16 +62,18 @@ class HomepageController
     	}
 
     	$aid = $predis->incr($app['config.redis']['aidkey']);
+		$voteListKey = ($request->request->get('votelistkey') != null) ? $request->request->get('votelistkey') : date('Y-m-d');
 
     	$predis->set('info:' . $aid, json_encode([
     		'aid' => $aid,
     		'url' => $url,
     		'added' => time(),
+    		'key_added_to' => 'giffight:' . $voteListKey,
     		'twitter_screen_name' => $app['session']->get('twitter_screen_name')
     		]));
 
     	$predis->set('score:' . $aid, 0);
-    	$predis->lpush(date('Y-m-d'), [ $aid ]);
+    	$predis->lpush($voteListKey, [ $aid ]);
 
     	return $app->redirect('/?fought=' . $aid);
     }

@@ -45,6 +45,7 @@
 				<div class="input-field col s12">
 		          <input autofocus placeholder="Where is this awesome gif located? http://...." id="url" name="url" type="text" class="validate">
 		          <label for="url">URL</label>
+		          <input type='hidden' name='votelistkey' id='votelistkey' value='{% if app.request.get("votelistkey") is not empty %}{{app.request.get("votelistkey")}}{% endif %}'>
 		        </div>
 		</div>
 		<div class="modal-footer">
