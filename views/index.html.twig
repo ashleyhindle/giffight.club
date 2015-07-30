@@ -27,10 +27,10 @@
     <a href='https://twitter.com/intent/tweet?text=@{{current_winner}} I am coming for your crown at giffight!&hashtags=giffight&via=giffight&related=ashleyhindle&url=http://giffight.club'>@{{current_winner}}</a>
   </div>
   </div>
-  <div class="row" style='overflow:hidden;'>
+  <div class="row">
 
     {% for gif in gifs %}
-      <div class="col s12 m4 l3 gif no-padding card">
+      <div class="col s12 m4 l3 gif no-padding">
         <div class='row vote'>
           <a href='/{{gif.aid}}/up' class='col s8 green lighten-1 center-align btn'>
                   <i class="material-icons left">done</i>UPVOTE!
