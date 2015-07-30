@@ -24,7 +24,11 @@ class HomepageController
 
         $render = $app['twig']->render('index.html.twig', 
         	[
-        		'gifs' => $gifs
+        		'gifs' => $gifs,
+        		'headline' => [
+        			'title' => "Dave Grohl’s Surgeon Invited to Sing With Foo Fighters And Rocked the Stadium!",
+        			'link' => 'http://www.goodnewsnetwork.org/dave-grohls-surgeon-invited-to-sing-with-foo-fighters-and-rocked-the-stadium/'
+        		]
         	]);
 
         return $render;
