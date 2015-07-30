@@ -13,7 +13,6 @@ class HomepageController
     	$gifAids = $predis->lrange(date('Y-m-d'), 0, 10000); // limit to 10, 000 gifs
     	$gifs = [];
 
-    	//return new Response(implode('-', $gifAids) . "-");
     	//TODO: Cache like mad, this is super expensive and silly
     	//TODO: Change to sorted set, and add ways of ordering gifs
     	foreach ($gifAids as $aid) {
