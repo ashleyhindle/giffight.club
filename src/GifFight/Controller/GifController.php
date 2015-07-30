@@ -25,7 +25,7 @@ class GifController
     	$predis->lrem(date('Y-m-d', $gif['added']), 1, $id);
     	$predis->lrem($gif['key_added_to'], 1, $id);
 
-    	return $app->redirect('/?removed');
+    	return $app->redirect('/fight/' . $gif['key_added_to'] . '?removed');
     }
 
     public function upvoteAction(Request $request, Application $app)
@@ -44,7 +44,7 @@ class GifController
     	$predis->incr('score:' . $aid);
     	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
     	
-    	return $app->redirect('/?voted');
+    	return $app->redirect('/fight/' . $gif['key_added_to'] . '?voted');
     }
 
     public function downvoteAction(Request $request, Application $app)
@@ -63,6 +63,6 @@ class GifController
     	$predis->decr('score:' . $aid);
     	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
     	
-    	return $app->redirect('/?voted');
+    	return $app->redirect('/fight/' . $gif['key_added_to'] . '?voted');
     }
 }

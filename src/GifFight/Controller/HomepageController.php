@@ -87,5 +87,4 @@ class HomepageController
     	$app['session']->set('loggedin', false);
     	return $app->redirect('/');
     }
-
 }
