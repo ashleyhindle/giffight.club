@@ -31,6 +31,10 @@ class GifController
     	$predis = $app['predis'];
     	$aid = $request->get('id');
 
+    	if(empty($app['session']->get('twitter_screen_name'))) {
+    		return $app->redirect('/?login-to-vote');
+    	}
+
     	if (in_array($app['session']->get('twitter_screen_name'), $predis->lrange('votes:' . $aid, 0, 10000))) {
     		return $app->redirect('/?cheating-pipe-smuggler');
     	}
@@ -46,6 +50,10 @@ class GifController
     	$predis = $app['predis'];
     	$aid = $request->get('id');
 
+    	if(empty($app['session']->get('twitter_screen_name'))) {
+    		return $app->redirect('/?login-to-vote');
+    	}
+    	
     	if (in_array($app['session']->get('twitter_screen_name'), $predis->lrange('votes:' . $aid, 0, 10000))) {
     		return $app->redirect('/?cheating-pipe-smuggler');
     	}
