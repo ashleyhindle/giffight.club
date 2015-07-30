@@ -7,8 +7,6 @@
 	font-weight: 600;
 }
 
-.vote .badge {
-	position: static;
-	min-width: 0;
-	font-weight: 400;
+.vote span {
+	cursor: auto;
 }

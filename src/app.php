@@ -24,7 +24,7 @@ use Silex\Provider\TwigServiceProvider;
 
 $app = new Application();
 $app->register(new Igorw\Silex\ConfigServiceProvider(__DIR__ . '/../config/always.php'));
-//$app->register(new Igorw\Silex\ConfigServiceProvider(__DIR__ . '/../config/secrets.php'));
+$app->register(new Igorw\Silex\ConfigServiceProvider(__DIR__ . '/../config/secrets.php'));
 
 if (getenv('APP_DEBUG') === true || getenv('APP_DEBUG') === 'true' || file_exists('/tmp/giffight.io_debug')) {
     $app['debug'] = true;
@@ -85,7 +85,8 @@ $app->register(
     )
 );
 
-$app->register(new Silex\Provider\SwiftmailerServiceProvider());
+$app->register(new Predis\Silex\ClientServiceProvider());
+
 /**
  * This registers $app['memcache'] which is a Memcached instance
  */
@@ -115,19 +116,6 @@ $app['twitter'] = $app->share(function ($app) {
 
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new ServiceControllerServiceProvider());
-$app->register(new DoctrineServiceProvider());
-
-$app["db.options"] = [
-    "driver" => "pdo_mysql",
-    "host"      => getenv('APP_MYSQL_HOSTNAME') ?: 'localhost',
-    "dbname"    => getenv('APP_MYSQL_DATABASE') ?: 'giffight',
-    "user"      => getenv('APP_MYSQL_USERNAME') ?: 'giffight',
-    "password"  => getenv('APP_MYSQL_PASSWORD') ?: 'giffight'
-];
-
-$app->register(new LewisB\PheanstalkServiceProvider\PheanstalkServiceProvider(), array(
-    'pheanstalk.server' => '127.0.0.1'
-));
 
 if ($app['debug'] === true || $app['debug'] === 'true') {
     if ($app['config.enableProfiler'] == true) {

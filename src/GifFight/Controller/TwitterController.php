@@ -45,12 +45,10 @@ class TwitterController
 			// store the token (which is different from the request token!)
 			$app['session']->set('twitter_oauth_token', $reply->oauth_token);
 			$app['session']->set('twitter_oauth_token_secret', $reply->oauth_token_secret);
+			$app['session']->set('loggedin', true);
+			$app['session']->set('twitter_screen_name', $reply->screen_name);
 
-			// send to same URL, without oauth GET parameters
-			return $app->json([
-				'oauth_token' => $reply->oauth_token,
-				'oauth_token_secret' => $reply->oauth_token_secret,
-				]);
+			return $app->redirect('/');
 		}
         return new Response('oops');
     }

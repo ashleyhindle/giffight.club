@@ -1,7 +1,22 @@
 <nav class="light-blue lighten-1" role="navigation">
   <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">GifFight.club</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="/twitter">Login with Twitter</a></li>
+      {% if app.session.get('loggedin') != true %}
+        <li>
+          <a href="/twitter">
+            <img alt='Login with twitter' src='/images/sign-in-with-twitter-gray.png'>
+          </a>
+        </li>
+      {% else %}
+        <li>
+          <a href='https://twitter.com/{{app.session.get('twitter_screen_name')}}'>Logged in as @{{app.session.get('twitter_screen_name')}}</a>
+        </li>
+      {% endif %}
+      <li>
+        <a class="red" href="/fight"> <!-- change href based on whether logged in or not? -->
+          <i class="material-icons left">thumb_up</i> FIGHT
+        </a>
+      </li>
     </ul>
 
     <ul id="nav-mobile" class="side-nav">

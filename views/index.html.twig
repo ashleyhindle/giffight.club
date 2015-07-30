@@ -1,7 +1,16 @@
 {% extends "layout.html.twig" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<blockquote>Rule 8: If this is your first time at GifFight.club, you have to fight</blockquote>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+  <a class="btn-large red" href="/fight"> <!-- change href based on whether logged in or not? -->
+    <i class="large material-icons left">thumb_up</i> FIGHT
+  </a>
+</div>
+
+<blockquote>
+Rule 8: If this is your first time at GifFight.club, you have to fight
+</blockquote>
+
 <div class="section no-pad-bot" id="index-banner">
     <h1 class="header center orange-text">Dave Grohl’s Surgeon Invited to Sing With Foo Fighters And Rocked the Stadium!</h1>
     <div class="row center">
@@ -13,19 +22,15 @@
   <div class="row">
     <div class="col s12 m4 l3 gif no-padding card">
       <div class='row vote'>
-        <a href='/123/ohyea'>
-          <div class='col s4 green lighten-3 center-align'>
+        <a href='/123/up' class='col s4 green lighten-1 center-align btn'>
             Nice!
-          </div>
         </a>
-        <span class="col s4 badge">3018</span>
-        <a href='/123/whatno'>
-          <div class='col s4 red lighten-3'>
+        <span class="col s4 btn-flat center-align">3018</span>
+        <a href='/123/down' class='col s4 red lighten-1 center-align btn'>
             Wut?!
-          </div>
         </a>
       </div>
-      
+
       <img class="responsive-img" src="http://media.giphy.com/media/11w95llBMgsCDm/giphy.gif">
 
       <div class='center-align'>
@@ -35,16 +40,12 @@
 
     <div class="col s12 m4 l3 gif no-padding card">
       <div class='row vote'>
-        <a href='/456/ohyea'>
-          <div class='col s4 green lighten-3 center-align'>
+        <a href='/123/up' class='col s4 green lighten-1 center-align btn'>
             Nice!
-          </div>
         </a>
-        <span class="col s4 badge">195</span>
-        <a href='/456/whatno'>
-          <div class='col s4 red lighten-3'>
+        <span class="col s4 btn-flat center-align">804</span>
+        <a href='/123/down' class='col s4 red lighten-1 center-align btn'>
             Wut?!
-          </div>
         </a>
       </div>
 
@@ -53,6 +54,12 @@
       <div class='center-align'>
         <a href='https://twitter.com/intent/tweet?text=@twitterUsername Nice gif at giffight.club, but mine is better! ner ner!&hashtags=giffight&via=giffight&related=ashleyhindle&url=http://giffight.club'>Posted by: @twitterUsername</a>
       </div>
+    </div>
+
+    <div class="col s12 m4 l3 gif no-padding">
+      <a class="btn red" href="/fight"> <!-- change href based on whether logged in or not? -->
+        <i class="material-icons left">thumb_up</i> Let me at 'em!
+      </a>
     </div>
   </div>
 </div>

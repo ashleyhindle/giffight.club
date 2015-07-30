@@ -9,6 +9,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 $app->get('/', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('homepage');
 
+$app->get('/{id}/up', 'GifFight\Controller\HomepageController::indexAction')
+    ->bind('vote-by-id-up');
+
+$app->get('/{id}/down', 'GifFight\Controller\HomepageController::indexAction')
+    ->bind('vote-by-id-down');
+
+$app->get('/fight', 'GifFight\Controller\HomepageController::indexAction')
+    ->bind('fight');
+
 $app->get('/date/{date}', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('date')
     ->assert('date', '\d{4}-\d{2}-\d{2}');
@@ -18,5 +27,5 @@ $app->get('/date/{date}/{title}', 'GifFight\Controller\HomepageController::index
     ->assert('date', '\d{4}-\d{2}-\d{2}')
     ->assert('title', '.+');
 
-$app->get('/twitter/auth', 'GifFight\Controller\TwitterController::authAction')
-	->bind('twitter-auth');
+$app->get('/twitter', 'GifFight\Controller\TwitterController::authAction')
+	->bind('twitter');
