@@ -24,6 +24,8 @@ $app->get('/{id}/remove', 'GifFight\Controller\GifController::removeAction')
 $app->post('/fight', 'GifFight\Controller\HomepageController::fightAction')
     ->bind('fight');
 
+$app->get('/twitter', 'GifFight\Controller\TwitterController::authAction')
+	->bind('twitter');
 
 $app->get('/date/{date}', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('date')
@@ -33,6 +35,3 @@ $app->get('/date/{date}/{title}', 'GifFight\Controller\HomepageController::index
     ->bind('date-title')
     ->assert('date', '\d{4}-\d{2}-\d{2}')
     ->assert('title', '.+');
-
-$app->get('/twitter', 'GifFight\Controller\TwitterController::authAction')
-	->bind('twitter');

@@ -15,17 +15,15 @@ class HomepageController
 
     	//return new Response(implode('-', $gifAids) . "-");
     	//TODO: Cache like mad, this is super expensive and silly
+    	//TODO: Change to sorted set, and add ways of ordering gifs
     	foreach ($gifAids as $aid) {
     		$gif = json_decode($predis->get('info:'.$aid), true);
     		$gif['score'] = $predis->get('score:'.$aid);
     		$gifs[] = $gif;
     	}
 
-    	//return $app->json($gifs);
-
         $render = $app['twig']->render('index.html.twig', 
         	[
-        		'aidkey' => $predis->get($app['config.redis']['aidkey']),
         		'gifs' => $gifs
         	]);
 
