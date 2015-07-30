@@ -9,11 +9,17 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 $app->get('/', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('homepage');
 
+$app->get('/logout', 'GifFight\Controller\HomepageController::logoutAction')
+    ->bind('logout');
+
 $app->get('/{id}/up', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('vote-by-id-up');
 
 $app->get('/{id}/down', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('vote-by-id-down');
+
+$app->get('/{id}/remove', 'GifFight\Controller\HomepageController::indexAction')
+    ->bind('remove-by-id');
 
 $app->get('/fight', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('fight');

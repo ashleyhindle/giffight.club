@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% block head %}
-<title>{% block title %}{% endblock %} - UpToDate.xyz</title>
+<title>{{aidkey}} - {% block title %}{% endblock %} - GifFight.club</title>
 {% endblock %}
 {% block assets %}
 <link rel="stylesheet" href="/css/materialize.css">
@@ -15,13 +15,30 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="/js/materialize.js"></script>
-
+<script src="/js/app.js"></script>
 
 </script>
 {% endblock %}
 </head>
 <body>
+<!-- Modal Structure -->
+<div id="fight-modal" class="modal bottom-sheet">
+	<form class="s12" action="/fight" method="POST">
+		<div class="modal-content row">
+			<h4>Round One. FIGHT!</h4>
+				<div class="input-field col s12">
+		          <input placeholder="Where is this awesome gif located? http://...." id="url" type="text" class="validate">
+		          <label for="url">URL</label>
+		        </div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<button type='submit' class="btn waves-effect waves-green">Submit</button>
+		</div>
+	</form>
+</div>
 {% include 'navbar.html.twig' %}
+
 <div class='container'>
 	{% block content %}{% endblock %}
 </div> <!-- end of container -->

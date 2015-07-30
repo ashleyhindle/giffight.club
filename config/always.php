@@ -1,5 +1,9 @@
 <?php
 return array (
+    'config.redis' => [
+        'prefix' => 'giffight:',
+        'aidkey' => 'giffight-aid'
+    ],
     'config.debug' => true,
     'config.enableProfiler' => false,
     'config.monologConsts' =>

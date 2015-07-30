@@ -9,9 +9,23 @@ class HomepageController
 {
     public function indexAction(Request $request, Application $app)
     {
-        $render = $app['twig']->render('index.html.twig', [ ]);
+    	$app['predis']->incr($app['config.redis']['aidkey']);
+        $render = $app['twig']->render('index.html.twig', 
+        	[
+        		'aidkey' => $app['predis']->get($app['config.redis']['aidkey'])
+        	]);
 
         return $render;
+    }
+
+    public function logoutAction(Application $app)
+    {
+		$app['session']->remove('twitter_oauth_token');
+		$app['session']->remove('twitter_oauth_token_secret');
+		$app['session']->remove('twitter_screen_name');
+
+    	$app['session']->set('loggedin', false);
+    	return $app->redirect('/');
     }
 
 }
