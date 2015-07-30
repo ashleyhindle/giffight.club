@@ -12,10 +12,10 @@ $app->get('/', 'GifFight\Controller\HomepageController::indexAction')
 $app->get('/logout', 'GifFight\Controller\HomepageController::logoutAction')
     ->bind('logout');
 
-$app->get('/{id}/up', 'GifFight\Controller\HomepageController::indexAction')
+$app->get('/{id}/up', 'GifFight\Controller\GifController::upvoteAction')
     ->bind('vote-by-id-up');
 
-$app->get('/{id}/down', 'GifFight\Controller\HomepageController::indexAction')
+$app->get('/{id}/down', 'GifFight\Controller\GifController::downvoteAction')
     ->bind('vote-by-id-down');
 
 $app->get('/{id}/remove', 'GifFight\Controller\GifController::removeAction')
@@ -23,6 +23,7 @@ $app->get('/{id}/remove', 'GifFight\Controller\GifController::removeAction')
 
 $app->post('/fight', 'GifFight\Controller\HomepageController::fightAction')
     ->bind('fight');
+
 
 $app->get('/date/{date}', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('date')

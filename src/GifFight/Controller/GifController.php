@@ -25,4 +25,24 @@ class GifController
 
     	return $app->redirect('/?removed');
     }
+
+    public function upvoteAction(Request $request, Application $app)
+    {
+    	$predis = $app['predis'];
+    	$aid = $request->get('id');
+    	$predis->incr('score:' . $aid);
+    	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
+    	
+    	return $app->redirect('/?voted');
+    }
+
+    public function downvoteAction(Request $request, Application $app)
+    {
+    	$predis = $app['predis'];
+    	$aid = $request->get('id');
+    	$predis->decr('score:' . $aid);
+    	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
+    	
+    	return $app->redirect('/?voted');
+    }
 }
