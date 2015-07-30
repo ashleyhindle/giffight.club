@@ -68,7 +68,7 @@ class HomepageController
     		'aid' => $aid,
     		'url' => $url,
     		'added' => time(),
-    		'key_added_to' => 'giffight:' . $voteListKey,
+    		'key_added_to' => $voteListKey,
     		'twitter_screen_name' => $app['session']->get('twitter_screen_name')
     		]));
 
