@@ -25,8 +25,8 @@ class HomepageController
         	[
         		'gifs' => $gifs,
         		'headline' => [
-        			'title' => "Behind Bars Barista Training a Boost for Women’s Prison Inmates",
-        			'link' => 'http://www.goodnewsnetwork.org/behind-bars-barista-training-boost-womens-prison-inmates/'
+        			'title' => "Your reaction when you step on lego",
+        			'link' => ''
         		]
         	]);
 
