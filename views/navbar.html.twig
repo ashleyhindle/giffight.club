@@ -13,14 +13,26 @@
         </li>
       {% endif %}
       <li>
-        <a class="red{% if app.session.get('loggedin') == true %} modal-trigger{% endif %}" href="{% if app.session.get('loggedin') != true %}/twitter{% else %}#fight-modal{% endif %}"> <!-- change href based on whether logged in or not? -->
-          <i class="material-icons left">thumb_up</i> FIGHT
-        </a>
+        {% include 'partials/fight-button.html.twig' %}
       </li>
     </ul>
 
+    <!-- Why does this have to be duplicated just for a mobile menu?  It doesn't in bootstrap or zurb foundation -->
     <ul id="nav-mobile" class="side-nav">
-      <li><a href="/twitter/">Login with Twitter</a></li>
+      {% if app.session.get('loggedin') != true %}
+        <li>
+          <a href="/twitter">
+            <img alt='Login with twitter' src='/images/sign-in-with-twitter-gray.png'>
+          </a>
+        </li>
+      {% else %}
+        <li>
+          <a href='/logout'>Logout @{{app.session.get('twitter_screen_name')}}</a>
+        </li>
+      {% endif %}
+      <li>
+        {% include 'partials/fight-button.html.twig' %}
+      </li>
     </ul>
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
   </div>

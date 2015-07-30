@@ -18,6 +18,14 @@ class HomepageController
         return $render;
     }
 
+    public function fightAction(Request $request, Application $app)
+    {
+    	$predis = $app['predis'];
+    	
+
+    	return $app->redirect('/');
+    }
+
     public function logoutAction(Application $app)
     {
 		$app['session']->remove('twitter_oauth_token');
