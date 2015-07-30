@@ -10,3 +10,12 @@
 .vote span {
 	cursor: auto;
 }
+
+.card {
+	overflow: visible;
+}
+
+.card .card-image {
+	position: relative;
+	overflow: visible;
+}
