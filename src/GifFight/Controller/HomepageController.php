@@ -12,12 +12,18 @@ class HomepageController
     	$predis = $app['predis'];
     	$gifAids = $predis->lrange(date('Y-m-d'), 0, 10000); // limit to 10, 000 gifs
     	$gifs = [];
+    	$current_winner = 'giffight';
+    	$topScore = 0;
 
     	//TODO: Cache like mad, this is super expensive and silly
     	//TODO: Change to sorted set, and add ways of ordering gifs
     	foreach ($gifAids as $aid) {
     		$gif = json_decode($predis->get('info:'.$aid), true);
     		$gif['score'] = $predis->get('score:'.$aid);
+    		if ($gif['score'] > $topScore) {
+    			$current_winner = $gif['twitter_screen_name'];
+    			$topScore = $gif['score'];
+    		}
     		$gifs[] = $gif;
     	}
 
@@ -27,7 +33,8 @@ class HomepageController
         		'headline' => [
         			'title' => "Your reaction when you step on lego",
         			'link' => ''
-        		]
+        		],
+        		'current_winner' => $current_winner
         	]);
 
         return $render;

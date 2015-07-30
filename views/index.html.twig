@@ -1,26 +1,31 @@
 {% extends "layout.html.twig" %}
 {% block content %}
 <div class='container'>
+  <div class="fixed-action-btn hide-on-small-only " style="bottom: 45px; right: 24px;">
+    {% include 'partials/fight-button.html.twig' %}
+  </div>
 
-<div class="fixed-action-btn hide-on-small-only " style="bottom: 45px; right: 24px;">
-  {% include 'partials/fight-button.html.twig' %}
+  <blockquote>
+  Fight with your best reaction gif to the information below. Round One. Fight!
+  </blockquote>
+
+  <div class="section no-pad-bot no-pad-top" id="index-banner">
+      <h1 class="header center orange-text">{{headline.title}}</h1>
+      {% if headline.link is not empty %}
+        <div class="row center">
+          <a href="{{headline.link}}">Find out more from GoodNewsNetwork.org</a>
+        </div>
+      {% endif %}
+  </div>
 </div>
 
-<blockquote>
-Fight with your best reaction gif to the information below. Round One. Fight!
-</blockquote>
-
-<div class="section no-pad-bot no-pad-top" id="index-banner">
-    <h1 class="header center orange-text">{{headline.title}}</h1>
-    {% if headline.link is not empty %}
-      <div class="row center">
-        <a href="{{headline.link}}">Find out more from GoodNewsNetwork.org</a>
-      </div>
-    {% endif %}
-</div>
-</div>
 
 <div class='container' style='width: 90%;'>
+  <div class='row'>
+    <div class='col s12'>
+    <strong>Current King Of The Gifs: </strong>
+    <a href='https://twitter.com/intent/tweet?text=@{{current_winner}} I am coming for your crown at giffight!&hashtags=giffight&via=giffight&related=ashleyhindle&url=http://giffight.club'>@{{current_winner}}</a>
+  </div>
   <div class="row">
 
     {% for gif in gifs %}
