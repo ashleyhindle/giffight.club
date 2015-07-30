@@ -18,10 +18,10 @@ $app->get('/{id}/up', 'GifFight\Controller\HomepageController::indexAction')
 $app->get('/{id}/down', 'GifFight\Controller\HomepageController::indexAction')
     ->bind('vote-by-id-down');
 
-$app->get('/{id}/remove', 'GifFight\Controller\HomepageController::indexAction')
+$app->get('/{id}/remove', 'GifFight\Controller\GifController::removeAction')
     ->bind('remove-by-id');
 
-$app->get('/fight', 'GifFight\Controller\HomepageController::indexAction')
+$app->post('/fight', 'GifFight\Controller\HomepageController::fightAction')
     ->bind('fight');
 
 $app->get('/date/{date}', 'GifFight\Controller\HomepageController::indexAction')

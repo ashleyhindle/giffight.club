@@ -1,0 +1,3 @@
+<a class="btn-large red{% if app.session.get('loggedin') == true %} modal-trigger{% endif %}" href="{% if app.session.get('loggedin') != true %}/twitter{% else %}#fight-modal{% endif %}"> <!-- change href based on whether logged in or not? -->
+          <i class="material-icons left">thumb_up</i> FIGHT
+        </a>

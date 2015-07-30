@@ -9,10 +9,24 @@ class HomepageController
 {
     public function indexAction(Request $request, Application $app)
     {
-    	$app['predis']->incr($app['config.redis']['aidkey']);
+    	$predis = $app['predis'];
+    	$gifAids = $predis->lrange(date('Y-m-d'), 0, 10000); // limit to 10, 000 gifs
+    	$gifs = [];
+
+    	//return new Response(implode('-', $gifAids) . "-");
+    	//TODO: Cache like mad, this is super expensive and silly
+    	foreach ($gifAids as $aid) {
+    		$gif = json_decode($predis->get('info:'.$aid), true);
+    		$gif['score'] = $predis->get('score:'.$aid);
+    		$gifs[] = $gif;
+    	}
+
+    	//return $app->json($gifs);
+
         $render = $app['twig']->render('index.html.twig', 
         	[
-        		'aidkey' => $app['predis']->get($app['config.redis']['aidkey'])
+        		'aidkey' => $predis->get($app['config.redis']['aidkey']),
+        		'gifs' => $gifs
         	]);
 
         return $render;
@@ -21,7 +35,25 @@ class HomepageController
     public function fightAction(Request $request, Application $app)
     {
     	$predis = $app['predis'];
-    	
+    	$url = $request->request->get('url');
+    	if(filter_var($url, FILTER_VALIDATE_URL) === false
+    		|| 
+    		empty(parse_url($url, PHP_URL_PATH))) {
+    		return $app->redirect('/?error=invalid-url');
+    	}
+
+    	$aid = $predis->incr($app['config.redis']['aidkey']);
+
+    	$predis->set('info:' . $aid, json_encode([
+    		'aid' => $aid,
+    		'url' => $url,
+    		'added' => time(),
+    		'twitter_screen_name' => $app['session']->get('twitter_screen_name')
+    		]));
+
+    	$predis->set('score:' . $aid, 1);
+    	$predis->lpush('votes:' . $aid, [ $app['session']->get('twitter_screen_name') ]);
+    	$predis->lpush(date('Y-m-d'), [ $aid ]);
 
     	return $app->redirect('/');
     }

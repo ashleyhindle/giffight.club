@@ -27,7 +27,7 @@
 		<div class="modal-content row">
 			<h4>Round One. FIGHT!</h4>
 				<div class="input-field col s12">
-		          <input placeholder="Where is this awesome gif located? http://...." id="url" type="text" class="validate">
+		          <input placeholder="Where is this awesome gif located? http://...." id="url" name="url" type="text" class="validate">
 		          <label for="url">URL</label>
 		        </div>
 		</div>
@@ -38,6 +38,21 @@
 	</form>
 </div>
 {% include 'navbar.html.twig' %}
+
+<!-- TODO: Replace this disgusting code with a flashbag and nice alerts (like bootstrap) -->
+{% if app.request.get('error') == 'invalid-url' %}
+	<script>
+		Materialize.toast('Your URL was really super invalid, try again!', 4000) // 4000 is the duration of the toast
+	</script>
+{% elseif app.request.get('error') == 'invalid-id' %}
+	<script>
+		Materialize.toast('That\'s a completely wrong gif id, wut?!', 4000) // 4000 is the duration of the toast
+	</script>
+{% elseif app.request.get('error') == 'dont-own' %}
+	<script>
+		Materialize.toast('Don\'t try to delete somebody elses gif, how rude?!', 4000) // 4000 is the duration of the toast
+	</script>
+{% endif %}
 
 <div class='container'>
 	{% block content %}{% endblock %}
