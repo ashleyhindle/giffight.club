@@ -75,7 +75,7 @@ class HomepageController
     	$predis->set('score:' . $aid, 0);
     	$predis->lpush($voteListKey, [ $aid ]);
 
-    	return $app->redirect('/?fought=' . $aid);
+    	return $app->redirect('/fight/' . $voteListKey . '?fought=' . $aid);
     }
 
     public function logoutAction(Application $app)
