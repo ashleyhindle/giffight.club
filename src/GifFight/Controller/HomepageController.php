@@ -15,6 +15,11 @@ class HomepageController
 		return new Response("Set 'title:{$voteListKey}' to '{$title}' now http://giffight.club/fight/{$voteListKey} should work");
 	}
 
+	public function redirectAction(Application $app)
+	{
+		return $app->redirect('/fight/movies'); // Redirect to most recent/popular one
+	}
+
     public function indexAction(Request $request, Application $app)
     {
     	$voteListKey = ($request->get('votelistkey') != null) ? $request->get('votelistkey') : date('Y-m-d');

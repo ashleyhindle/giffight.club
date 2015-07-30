@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
-$app->get('/', 'GifFight\Controller\HomepageController::indexAction')
+$app->get('/', 'GifFight\Controller\HomepageController::redirectAction')
     ->bind('homepage');
 
 $app->get('/redis/{votelistkey}/{title}', 'GifFight\Controller\HomepageController::redisAction')
