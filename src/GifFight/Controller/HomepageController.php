@@ -17,7 +17,7 @@ class HomepageController
 
 	public function redirectAction(Application $app)
 	{
-		return $app->redirect('/fight/weird'); // Redirect to most recent/popular one
+		return $app->redirect('/fight/thursday'); // Redirect to most recent/popular one
 	}
 
     public function indexAction(Request $request, Application $app)
